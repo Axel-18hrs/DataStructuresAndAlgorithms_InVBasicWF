@@ -28,13 +28,24 @@ Partial Class Form1
         CircularListToolStripMenuItem = New ToolStripMenuItem()
         DoublyListToolStripMenuItem = New ToolStripMenuItem()
         CircularDoublyListToolStripMenuItem = New ToolStripMenuItem()
+        StacksToolStripMenuItem = New ToolStripMenuItem()
+        StaticSToolStripMenuItem = New ToolStripMenuItem()
+        DinamicStackToolStripMenuItem = New ToolStripMenuItem()
+        QueuesToolStripMenuItem = New ToolStripMenuItem()
+        RegularQueueToolStripMenuItem = New ToolStripMenuItem()
+        DoubleQueueToolStripMenuItem = New ToolStripMenuItem()
+        PriorityQueueToolStripMenuItem = New ToolStripMenuItem()
+        CircularQueueToolStripMenuItem = New ToolStripMenuItem()
+        TreeToolStripMenuItem = New ToolStripMenuItem()
+        GraphsToolStripMenuItem = New ToolStripMenuItem()
+        SortingAlgorithmsToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(20, 20)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {ListsToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {ListsToolStripMenuItem, StacksToolStripMenuItem, QueuesToolStripMenuItem, TreeToolStripMenuItem, GraphsToolStripMenuItem, SortingAlgorithmsToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(1127, 28)
@@ -72,6 +83,74 @@ Partial Class Form1
         CircularDoublyListToolStripMenuItem.Size = New Size(224, 26)
         CircularDoublyListToolStripMenuItem.Text = "Circular Doubly List"
         ' 
+        ' StacksToolStripMenuItem
+        ' 
+        StacksToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {StaticSToolStripMenuItem, DinamicStackToolStripMenuItem})
+        StacksToolStripMenuItem.Name = "StacksToolStripMenuItem"
+        StacksToolStripMenuItem.Size = New Size(64, 24)
+        StacksToolStripMenuItem.Text = "Stacks"
+        ' 
+        ' StaticSToolStripMenuItem
+        ' 
+        StaticSToolStripMenuItem.Name = "StaticSToolStripMenuItem"
+        StaticSToolStripMenuItem.Size = New Size(224, 26)
+        StaticSToolStripMenuItem.Text = "Static Stack"
+        ' 
+        ' DinamicStackToolStripMenuItem
+        ' 
+        DinamicStackToolStripMenuItem.Name = "DinamicStackToolStripMenuItem"
+        DinamicStackToolStripMenuItem.Size = New Size(224, 26)
+        DinamicStackToolStripMenuItem.Text = "Dinamic Stack"
+        ' 
+        ' QueuesToolStripMenuItem
+        ' 
+        QueuesToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {RegularQueueToolStripMenuItem, DoubleQueueToolStripMenuItem, PriorityQueueToolStripMenuItem, CircularQueueToolStripMenuItem})
+        QueuesToolStripMenuItem.Name = "QueuesToolStripMenuItem"
+        QueuesToolStripMenuItem.Size = New Size(72, 24)
+        QueuesToolStripMenuItem.Text = "Queues"
+        ' 
+        ' RegularQueueToolStripMenuItem
+        ' 
+        RegularQueueToolStripMenuItem.Name = "RegularQueueToolStripMenuItem"
+        RegularQueueToolStripMenuItem.Size = New Size(224, 26)
+        RegularQueueToolStripMenuItem.Text = "Regular Queue"
+        ' 
+        ' DoubleQueueToolStripMenuItem
+        ' 
+        DoubleQueueToolStripMenuItem.Name = "DoubleQueueToolStripMenuItem"
+        DoubleQueueToolStripMenuItem.Size = New Size(224, 26)
+        DoubleQueueToolStripMenuItem.Text = "Double Queue"
+        ' 
+        ' PriorityQueueToolStripMenuItem
+        ' 
+        PriorityQueueToolStripMenuItem.Name = "PriorityQueueToolStripMenuItem"
+        PriorityQueueToolStripMenuItem.Size = New Size(224, 26)
+        PriorityQueueToolStripMenuItem.Text = "Priority Queue"
+        ' 
+        ' CircularQueueToolStripMenuItem
+        ' 
+        CircularQueueToolStripMenuItem.Name = "CircularQueueToolStripMenuItem"
+        CircularQueueToolStripMenuItem.Size = New Size(224, 26)
+        CircularQueueToolStripMenuItem.Text = "Circular Queue"
+        ' 
+        ' TreeToolStripMenuItem
+        ' 
+        TreeToolStripMenuItem.Name = "TreeToolStripMenuItem"
+        TreeToolStripMenuItem.Size = New Size(51, 24)
+        TreeToolStripMenuItem.Text = "Tree"
+        ' 
+        ' GraphsToolStripMenuItem
+        ' 
+        GraphsToolStripMenuItem.Name = "GraphsToolStripMenuItem"
+        GraphsToolStripMenuItem.Size = New Size(69, 24)
+        GraphsToolStripMenuItem.Text = "Graphs"
+        ' 
+        ' SortingAlgorithmsToolStripMenuItem
+        ' 
+        SortingAlgorithmsToolStripMenuItem.Name = "SortingAlgorithmsToolStripMenuItem"
+        SortingAlgorithmsToolStripMenuItem.Size = New Size(148, 24)
+        SortingAlgorithmsToolStripMenuItem.Text = "Sorting Algorithms"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -96,5 +175,16 @@ Partial Class Form1
     Friend WithEvents CircularListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DoublyListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CircularDoublyListToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StacksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StaticSToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DinamicStackToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QueuesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RegularQueueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DoubleQueueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PriorityQueueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CircularQueueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TreeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GraphsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SortingAlgorithmsToolStripMenuItem As ToolStripMenuItem
 
 End Class
