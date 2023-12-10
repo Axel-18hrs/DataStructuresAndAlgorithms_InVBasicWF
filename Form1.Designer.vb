@@ -22,10 +22,19 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "Form1"
+        SuspendLayout()
+        ' 
+        ' Form1
+        ' 
+        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1127, 527)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
+        Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Form1"
+        ResumeLayout(False)
     End Sub
 
 End Class
