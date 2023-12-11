@@ -39,6 +39,20 @@ Partial Class Form1
         TreeToolStripMenuItem = New ToolStripMenuItem()
         GraphsToolStripMenuItem = New ToolStripMenuItem()
         SortingAlgorithmsToolStripMenuItem = New ToolStripMenuItem()
+        BinaryTreeSortToolStripMenuItem = New ToolStripMenuItem()
+        BubbleSortToolStripMenuItem = New ToolStripMenuItem()
+        BucketSortToolStripMenuItem = New ToolStripMenuItem()
+        CombSortToolStripMenuItem = New ToolStripMenuItem()
+        CountingSortToolStripMenuItem = New ToolStripMenuItem()
+        GnomeSortToolStripMenuItem = New ToolStripMenuItem()
+        HeapSortToolStripMenuItem = New ToolStripMenuItem()
+        InsertionSortToolStripMenuItem = New ToolStripMenuItem()
+        MergeSortToolStripMenuItem = New ToolStripMenuItem()
+        PigeonholeToolStripMenuItem = New ToolStripMenuItem()
+        QuickSortToolStripMenuItem = New ToolStripMenuItem()
+        RadixSortToolStripMenuItem = New ToolStripMenuItem()
+        ShellSortToolStripMenuItem = New ToolStripMenuItem()
+        SmoothSortToolStripMenuItem = New ToolStripMenuItem()
         pnlLists = New Panel()
         btnClear = New Button()
         btnDelete = New Button()
@@ -96,6 +110,36 @@ Partial Class Form1
         btnAdd = New Button()
         label4 = New Label()
         txtNumberBinaryTree = New TextBox()
+        pnlGraph = New Panel()
+        btnFindAwayGraph = New Button()
+        btnToursDFSGraph = New Button()
+        btnAddEdgeGraph = New Button()
+        btnDeleteGraph = New Button()
+        label14 = New Label()
+        label13 = New Label()
+        label12 = New Label()
+        txtOriginGraph = New TextBox()
+        label11 = New Label()
+        txtWeightGraph = New TextBox()
+        label10 = New Label()
+        txtDestinationGraph = New TextBox()
+        lsbTourGraph = New ListBox()
+        lsbAdyacencyMatrixGraph = New ListBox()
+        btnAddVertGraph = New Button()
+        label9 = New Label()
+        txtNumberGraph = New TextBox()
+        label8 = New Label()
+        lsbGraph = New ListBox()
+        pnlAlgorithmsOfSorting = New Panel()
+        label18 = New Label()
+        txtMaximumRangeAlgorithms = New TextBox()
+        label17 = New Label()
+        txtMinimumRangeAlgorithms = New TextBox()
+        label16 = New Label()
+        lsbAlgorithmSorting = New ListBox()
+        btnCantOfItemsAlgorithms = New Button()
+        label15 = New Label()
+        txtNumbersOfItemstoOrder = New TextBox()
         MenuStrip1.SuspendLayout()
         pnlLists.SuspendLayout()
         pnlQueues.SuspendLayout()
@@ -107,6 +151,8 @@ Partial Class Form1
         gbxMenuStackAll.SuspendLayout()
         gbxMenuStatickStack.SuspendLayout()
         pnlTree.SuspendLayout()
+        pnlGraph.SuspendLayout()
+        pnlAlgorithmsOfSorting.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
@@ -214,9 +260,94 @@ Partial Class Form1
         ' 
         ' SortingAlgorithmsToolStripMenuItem
         ' 
+        SortingAlgorithmsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {BinaryTreeSortToolStripMenuItem, BubbleSortToolStripMenuItem, BucketSortToolStripMenuItem, CombSortToolStripMenuItem, CountingSortToolStripMenuItem, GnomeSortToolStripMenuItem, HeapSortToolStripMenuItem, InsertionSortToolStripMenuItem, MergeSortToolStripMenuItem, PigeonholeToolStripMenuItem, QuickSortToolStripMenuItem, RadixSortToolStripMenuItem, ShellSortToolStripMenuItem, SmoothSortToolStripMenuItem})
         SortingAlgorithmsToolStripMenuItem.Name = "SortingAlgorithmsToolStripMenuItem"
         SortingAlgorithmsToolStripMenuItem.Size = New Size(148, 24)
         SortingAlgorithmsToolStripMenuItem.Text = "Sorting Algorithms"
+        ' 
+        ' BinaryTreeSortToolStripMenuItem
+        ' 
+        BinaryTreeSortToolStripMenuItem.Name = "BinaryTreeSortToolStripMenuItem"
+        BinaryTreeSortToolStripMenuItem.Size = New Size(224, 26)
+        BinaryTreeSortToolStripMenuItem.Text = "Binary Tree Sort"
+        ' 
+        ' BubbleSortToolStripMenuItem
+        ' 
+        BubbleSortToolStripMenuItem.Name = "BubbleSortToolStripMenuItem"
+        BubbleSortToolStripMenuItem.Size = New Size(224, 26)
+        BubbleSortToolStripMenuItem.Text = "Bubble Sort"
+        ' 
+        ' BucketSortToolStripMenuItem
+        ' 
+        BucketSortToolStripMenuItem.Name = "BucketSortToolStripMenuItem"
+        BucketSortToolStripMenuItem.Size = New Size(224, 26)
+        BucketSortToolStripMenuItem.Text = "Bucket Sort"
+        ' 
+        ' CombSortToolStripMenuItem
+        ' 
+        CombSortToolStripMenuItem.Name = "CombSortToolStripMenuItem"
+        CombSortToolStripMenuItem.Size = New Size(224, 26)
+        CombSortToolStripMenuItem.Text = "Comb Sort"
+        ' 
+        ' CountingSortToolStripMenuItem
+        ' 
+        CountingSortToolStripMenuItem.Name = "CountingSortToolStripMenuItem"
+        CountingSortToolStripMenuItem.Size = New Size(224, 26)
+        CountingSortToolStripMenuItem.Text = "Counting Sort"
+        ' 
+        ' GnomeSortToolStripMenuItem
+        ' 
+        GnomeSortToolStripMenuItem.Name = "GnomeSortToolStripMenuItem"
+        GnomeSortToolStripMenuItem.Size = New Size(224, 26)
+        GnomeSortToolStripMenuItem.Text = "Gnome Sort"
+        ' 
+        ' HeapSortToolStripMenuItem
+        ' 
+        HeapSortToolStripMenuItem.Name = "HeapSortToolStripMenuItem"
+        HeapSortToolStripMenuItem.Size = New Size(224, 26)
+        HeapSortToolStripMenuItem.Text = "Heap Sort"
+        ' 
+        ' InsertionSortToolStripMenuItem
+        ' 
+        InsertionSortToolStripMenuItem.Name = "InsertionSortToolStripMenuItem"
+        InsertionSortToolStripMenuItem.Size = New Size(224, 26)
+        InsertionSortToolStripMenuItem.Text = "Insertion Sort"
+        ' 
+        ' MergeSortToolStripMenuItem
+        ' 
+        MergeSortToolStripMenuItem.Name = "MergeSortToolStripMenuItem"
+        MergeSortToolStripMenuItem.Size = New Size(224, 26)
+        MergeSortToolStripMenuItem.Text = "Merge Sort"
+        ' 
+        ' PigeonholeToolStripMenuItem
+        ' 
+        PigeonholeToolStripMenuItem.Name = "PigeonholeToolStripMenuItem"
+        PigeonholeToolStripMenuItem.Size = New Size(224, 26)
+        PigeonholeToolStripMenuItem.Text = "Pigeonhole"
+        ' 
+        ' QuickSortToolStripMenuItem
+        ' 
+        QuickSortToolStripMenuItem.Name = "QuickSortToolStripMenuItem"
+        QuickSortToolStripMenuItem.Size = New Size(224, 26)
+        QuickSortToolStripMenuItem.Text = "Quick Sort"
+        ' 
+        ' RadixSortToolStripMenuItem
+        ' 
+        RadixSortToolStripMenuItem.Name = "RadixSortToolStripMenuItem"
+        RadixSortToolStripMenuItem.Size = New Size(224, 26)
+        RadixSortToolStripMenuItem.Text = "Radix Sort"
+        ' 
+        ' ShellSortToolStripMenuItem
+        ' 
+        ShellSortToolStripMenuItem.Name = "ShellSortToolStripMenuItem"
+        ShellSortToolStripMenuItem.Size = New Size(224, 26)
+        ShellSortToolStripMenuItem.Text = "Shell Sort"
+        ' 
+        ' SmoothSortToolStripMenuItem
+        ' 
+        SmoothSortToolStripMenuItem.Name = "SmoothSortToolStripMenuItem"
+        SmoothSortToolStripMenuItem.Size = New Size(224, 26)
+        SmoothSortToolStripMenuItem.Text = "Smooth Sort"
         ' 
         ' pnlLists
         ' 
@@ -781,11 +912,312 @@ Partial Class Form1
         txtNumberBinaryTree.Size = New Size(253, 27)
         txtNumberBinaryTree.TabIndex = 38
         ' 
+        ' pnlGraph
+        ' 
+        pnlGraph.Controls.Add(btnFindAwayGraph)
+        pnlGraph.Controls.Add(btnToursDFSGraph)
+        pnlGraph.Controls.Add(btnAddEdgeGraph)
+        pnlGraph.Controls.Add(btnDeleteGraph)
+        pnlGraph.Controls.Add(label14)
+        pnlGraph.Controls.Add(label13)
+        pnlGraph.Controls.Add(label12)
+        pnlGraph.Controls.Add(txtOriginGraph)
+        pnlGraph.Controls.Add(label11)
+        pnlGraph.Controls.Add(txtWeightGraph)
+        pnlGraph.Controls.Add(label10)
+        pnlGraph.Controls.Add(txtDestinationGraph)
+        pnlGraph.Controls.Add(lsbTourGraph)
+        pnlGraph.Controls.Add(lsbAdyacencyMatrixGraph)
+        pnlGraph.Controls.Add(btnAddVertGraph)
+        pnlGraph.Controls.Add(label9)
+        pnlGraph.Controls.Add(txtNumberGraph)
+        pnlGraph.Controls.Add(label8)
+        pnlGraph.Controls.Add(lsbGraph)
+        pnlGraph.Location = New Point(-2, 31)
+        pnlGraph.Name = "pnlGraph"
+        pnlGraph.Size = New Size(1133, 498)
+        pnlGraph.TabIndex = 19
+        ' 
+        ' btnFindAwayGraph
+        ' 
+        btnFindAwayGraph.Location = New Point(565, 46)
+        btnFindAwayGraph.Name = "btnFindAwayGraph"
+        btnFindAwayGraph.Size = New Size(159, 40)
+        btnFindAwayGraph.TabIndex = 62
+        btnFindAwayGraph.Text = "Find way"
+        btnFindAwayGraph.UseVisualStyleBackColor = True
+        ' 
+        ' btnToursDFSGraph
+        ' 
+        btnToursDFSGraph.Location = New Point(471, 101)
+        btnToursDFSGraph.Name = "btnToursDFSGraph"
+        btnToursDFSGraph.Size = New Size(159, 40)
+        btnToursDFSGraph.TabIndex = 61
+        btnToursDFSGraph.Text = "Tours DFS"
+        btnToursDFSGraph.UseVisualStyleBackColor = True
+        ' 
+        ' btnAddEdgeGraph
+        ' 
+        btnAddEdgeGraph.Location = New Point(306, 101)
+        btnAddEdgeGraph.Name = "btnAddEdgeGraph"
+        btnAddEdgeGraph.Size = New Size(159, 40)
+        btnAddEdgeGraph.TabIndex = 60
+        btnAddEdgeGraph.Text = "Add edge"
+        btnAddEdgeGraph.UseVisualStyleBackColor = True
+        ' 
+        ' btnDeleteGraph
+        ' 
+        btnDeleteGraph.Location = New Point(935, 89)
+        btnDeleteGraph.Name = "btnDeleteGraph"
+        btnDeleteGraph.Size = New Size(159, 40)
+        btnDeleteGraph.TabIndex = 59
+        btnDeleteGraph.Text = "Delete"
+        btnDeleteGraph.UseVisualStyleBackColor = True
+        ' 
+        ' label14
+        ' 
+        label14.AutoSize = True
+        label14.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label14.Location = New Point(810, 175)
+        label14.Name = "label14"
+        label14.Size = New Size(108, 26)
+        label14.TabIndex = 58
+        label14.Text = "DFS tour"
+        ' 
+        ' label13
+        ' 
+        label13.AutoSize = True
+        label13.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label13.Location = New Point(29, 175)
+        label13.Name = "label13"
+        label13.Size = New Size(83, 26)
+        label13.TabIndex = 57
+        label13.Text = "Graph"
+        ' 
+        ' label12
+        ' 
+        label12.AutoSize = True
+        label12.Location = New Point(306, 33)
+        label12.Name = "label12"
+        label12.Size = New Size(50, 20)
+        label12.TabIndex = 56
+        label12.Text = "Origin"
+        ' 
+        ' txtOriginGraph
+        ' 
+        txtOriginGraph.ImeMode = ImeMode.NoControl
+        txtOriginGraph.Location = New Point(306, 56)
+        txtOriginGraph.Name = "txtOriginGraph"
+        txtOriginGraph.Size = New Size(253, 27)
+        txtOriginGraph.TabIndex = 55
+        ' 
+        ' label11
+        ' 
+        label11.AutoSize = True
+        label11.Location = New Point(29, 89)
+        label11.Name = "label11"
+        label11.Size = New Size(56, 20)
+        label11.TabIndex = 54
+        label11.Text = "Weight"
+        ' 
+        ' txtWeightGraph
+        ' 
+        txtWeightGraph.ImeMode = ImeMode.NoControl
+        txtWeightGraph.Location = New Point(29, 112)
+        txtWeightGraph.Name = "txtWeightGraph"
+        txtWeightGraph.Size = New Size(253, 27)
+        txtWeightGraph.TabIndex = 53
+        ' 
+        ' label10
+        ' 
+        label10.AutoSize = True
+        label10.Location = New Point(29, 33)
+        label10.Name = "label10"
+        label10.Size = New Size(85, 20)
+        label10.TabIndex = 52
+        label10.Text = "Destination"
+        ' 
+        ' txtDestinationGraph
+        ' 
+        txtDestinationGraph.ImeMode = ImeMode.NoControl
+        txtDestinationGraph.Location = New Point(29, 56)
+        txtDestinationGraph.Name = "txtDestinationGraph"
+        txtDestinationGraph.Size = New Size(253, 27)
+        txtDestinationGraph.TabIndex = 51
+        ' 
+        ' lsbTourGraph
+        ' 
+        lsbTourGraph.Font = New Font("Segoe UI", 12F)
+        lsbTourGraph.FormattingEnabled = True
+        lsbTourGraph.ItemHeight = 28
+        lsbTourGraph.Location = New Point(810, 203)
+        lsbTourGraph.Margin = New Padding(3, 4, 3, 4)
+        lsbTourGraph.Name = "lsbTourGraph"
+        lsbTourGraph.Size = New Size(295, 284)
+        lsbTourGraph.TabIndex = 50
+        ' 
+        ' lsbAdyacencyMatrixGraph
+        ' 
+        lsbAdyacencyMatrixGraph.Font = New Font("Segoe UI", 12F)
+        lsbAdyacencyMatrixGraph.FormattingEnabled = True
+        lsbAdyacencyMatrixGraph.ItemHeight = 28
+        lsbAdyacencyMatrixGraph.Location = New Point(368, 203)
+        lsbAdyacencyMatrixGraph.Margin = New Padding(3, 4, 3, 4)
+        lsbAdyacencyMatrixGraph.Name = "lsbAdyacencyMatrixGraph"
+        lsbAdyacencyMatrixGraph.Size = New Size(391, 284)
+        lsbAdyacencyMatrixGraph.TabIndex = 49
+        ' 
+        ' btnAddVertGraph
+        ' 
+        btnAddVertGraph.Location = New Point(770, 89)
+        btnAddVertGraph.Name = "btnAddVertGraph"
+        btnAddVertGraph.Size = New Size(159, 40)
+        btnAddVertGraph.TabIndex = 48
+        btnAddVertGraph.Text = "Add"
+        btnAddVertGraph.UseVisualStyleBackColor = True
+        ' 
+        ' label9
+        ' 
+        label9.AutoSize = True
+        label9.Location = New Point(770, 33)
+        label9.Name = "label9"
+        label9.Size = New Size(63, 20)
+        label9.TabIndex = 47
+        label9.Text = "Number"
+        ' 
+        ' txtNumberGraph
+        ' 
+        txtNumberGraph.ImeMode = ImeMode.NoControl
+        txtNumberGraph.Location = New Point(770, 56)
+        txtNumberGraph.Name = "txtNumberGraph"
+        txtNumberGraph.Size = New Size(253, 27)
+        txtNumberGraph.TabIndex = 46
+        ' 
+        ' label8
+        ' 
+        label8.AutoSize = True
+        label8.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label8.Location = New Point(368, 175)
+        label8.Name = "label8"
+        label8.Size = New Size(207, 26)
+        label8.TabIndex = 45
+        label8.Text = "Adjacency matrix"
+        ' 
+        ' lsbGraph
+        ' 
+        lsbGraph.Font = New Font("Segoe UI", 12F)
+        lsbGraph.FormattingEnabled = True
+        lsbGraph.ItemHeight = 28
+        lsbGraph.Location = New Point(29, 203)
+        lsbGraph.Margin = New Padding(3, 4, 3, 4)
+        lsbGraph.Name = "lsbGraph"
+        lsbGraph.Size = New Size(295, 284)
+        lsbGraph.TabIndex = 44
+        ' 
+        ' pnlAlgorithmsOfSorting
+        ' 
+        pnlAlgorithmsOfSorting.Controls.Add(label18)
+        pnlAlgorithmsOfSorting.Controls.Add(txtMaximumRangeAlgorithms)
+        pnlAlgorithmsOfSorting.Controls.Add(label17)
+        pnlAlgorithmsOfSorting.Controls.Add(txtMinimumRangeAlgorithms)
+        pnlAlgorithmsOfSorting.Controls.Add(label16)
+        pnlAlgorithmsOfSorting.Controls.Add(lsbAlgorithmSorting)
+        pnlAlgorithmsOfSorting.Controls.Add(btnCantOfItemsAlgorithms)
+        pnlAlgorithmsOfSorting.Controls.Add(label15)
+        pnlAlgorithmsOfSorting.Controls.Add(txtNumbersOfItemstoOrder)
+        pnlAlgorithmsOfSorting.Location = New Point(-5, 31)
+        pnlAlgorithmsOfSorting.Name = "pnlAlgorithmsOfSorting"
+        pnlAlgorithmsOfSorting.Size = New Size(1135, 501)
+        pnlAlgorithmsOfSorting.TabIndex = 20
+        ' 
+        ' label18
+        ' 
+        label18.AutoSize = True
+        label18.Location = New Point(86, 213)
+        label18.Name = "label18"
+        label18.Size = New Size(117, 20)
+        label18.TabIndex = 69
+        label18.Text = "Maximum range"
+        ' 
+        ' txtMaximumRangeAlgorithms
+        ' 
+        txtMaximumRangeAlgorithms.ImeMode = ImeMode.NoControl
+        txtMaximumRangeAlgorithms.Location = New Point(86, 236)
+        txtMaximumRangeAlgorithms.Name = "txtMaximumRangeAlgorithms"
+        txtMaximumRangeAlgorithms.Size = New Size(253, 27)
+        txtMaximumRangeAlgorithms.TabIndex = 68
+        ' 
+        ' label17
+        ' 
+        label17.AutoSize = True
+        label17.Location = New Point(86, 137)
+        label17.Name = "label17"
+        label17.Size = New Size(114, 20)
+        label17.TabIndex = 67
+        label17.Text = "Minimum range"
+        ' 
+        ' txtMinimumRangeAlgorithms
+        ' 
+        txtMinimumRangeAlgorithms.ImeMode = ImeMode.NoControl
+        txtMinimumRangeAlgorithms.Location = New Point(86, 160)
+        txtMinimumRangeAlgorithms.Name = "txtMinimumRangeAlgorithms"
+        txtMinimumRangeAlgorithms.Size = New Size(253, 27)
+        txtMinimumRangeAlgorithms.TabIndex = 66
+        ' 
+        ' label16
+        ' 
+        label16.AutoSize = True
+        label16.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label16.Location = New Point(725, 37)
+        label16.Name = "label16"
+        label16.Size = New Size(127, 26)
+        label16.TabIndex = 65
+        label16.Text = "Algorithm"
+        ' 
+        ' lsbAlgorithmSorting
+        ' 
+        lsbAlgorithmSorting.Font = New Font("Segoe UI", 12F)
+        lsbAlgorithmSorting.FormattingEnabled = True
+        lsbAlgorithmSorting.ItemHeight = 28
+        lsbAlgorithmSorting.Location = New Point(553, 72)
+        lsbAlgorithmSorting.Margin = New Padding(3, 4, 3, 4)
+        lsbAlgorithmSorting.Name = "lsbAlgorithmSorting"
+        lsbAlgorithmSorting.Size = New Size(470, 368)
+        lsbAlgorithmSorting.TabIndex = 64
+        ' 
+        ' btnCantOfItemsAlgorithms
+        ' 
+        btnCantOfItemsAlgorithms.Location = New Point(86, 295)
+        btnCantOfItemsAlgorithms.Name = "btnCantOfItemsAlgorithms"
+        btnCantOfItemsAlgorithms.Size = New Size(159, 40)
+        btnCantOfItemsAlgorithms.TabIndex = 62
+        btnCantOfItemsAlgorithms.Text = "Add"
+        btnCantOfItemsAlgorithms.UseVisualStyleBackColor = True
+        ' 
+        ' label15
+        ' 
+        label15.AutoSize = True
+        label15.Location = New Point(86, 65)
+        label15.Name = "label15"
+        label15.Size = New Size(179, 20)
+        label15.TabIndex = 61
+        label15.Text = "Number of items to order"
+        ' 
+        ' txtNumbersOfItemstoOrder
+        ' 
+        txtNumbersOfItemstoOrder.ImeMode = ImeMode.NoControl
+        txtNumbersOfItemstoOrder.Location = New Point(86, 88)
+        txtNumbersOfItemstoOrder.Name = "txtNumbersOfItemstoOrder"
+        txtNumbersOfItemstoOrder.Size = New Size(253, 27)
+        txtNumbersOfItemstoOrder.TabIndex = 60
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1127, 527)
+        Controls.Add(pnlAlgorithmsOfSorting)
+        Controls.Add(pnlGraph)
         Controls.Add(pnlTree)
         Controls.Add(pnlQueues)
         Controls.Add(pnlStacks)
@@ -818,6 +1250,10 @@ Partial Class Form1
         gbxMenuStatickStack.PerformLayout()
         pnlTree.ResumeLayout(False)
         pnlTree.PerformLayout()
+        pnlGraph.ResumeLayout(False)
+        pnlGraph.PerformLayout()
+        pnlAlgorithmsOfSorting.ResumeLayout(False)
+        pnlAlgorithmsOfSorting.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -896,5 +1332,49 @@ Partial Class Form1
     Private WithEvents btnAdd As Button
     Private WithEvents label4 As Label
     Private WithEvents txtNumberBinaryTree As TextBox
+    Private WithEvents pnlGraph As Panel
+    Private WithEvents btnFindAwayGraph As Button
+    Private WithEvents btnToursDFSGraph As Button
+    Private WithEvents btnAddEdgeGraph As Button
+    Private WithEvents btnDeleteGraph As Button
+    Private WithEvents label14 As Label
+    Private WithEvents label13 As Label
+    Private WithEvents label12 As Label
+    Private WithEvents txtOriginGraph As TextBox
+    Private WithEvents label11 As Label
+    Private WithEvents txtWeightGraph As TextBox
+    Private WithEvents label10 As Label
+    Private WithEvents txtDestinationGraph As TextBox
+    Private WithEvents lsbTourGraph As ListBox
+    Private WithEvents lsbAdyacencyMatrixGraph As ListBox
+    Private WithEvents btnAddVertGraph As Button
+    Private WithEvents label9 As Label
+    Private WithEvents txtNumberGraph As TextBox
+    Private WithEvents label8 As Label
+    Private WithEvents lsbGraph As ListBox
+    Private WithEvents pnlAlgorithmsOfSorting As Panel
+    Private WithEvents label18 As Label
+    Private WithEvents txtMaximumRangeAlgorithms As TextBox
+    Private WithEvents label17 As Label
+    Private WithEvents txtMinimumRangeAlgorithms As TextBox
+    Private WithEvents label16 As Label
+    Private WithEvents lsbAlgorithmSorting As ListBox
+    Private WithEvents btnCantOfItemsAlgorithms As Button
+    Private WithEvents label15 As Label
+    Private WithEvents txtNumbersOfItemstoOrder As TextBox
+    Friend WithEvents BinaryTreeSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BubbleSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BucketSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CombSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CountingSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GnomeSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HeapSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InsertionSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MergeSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PigeonholeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuickSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RadixSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShellSortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SmoothSortToolStripMenuItem As ToolStripMenuItem
 
 End Class

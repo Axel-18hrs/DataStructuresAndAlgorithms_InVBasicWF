@@ -1,162 +1,137 @@
 ﻿Imports System.Text
-Public Class Graph(Of T)
-    Implements ImethodGraphs(Of T)
+Friend Class Graph(Of T)
+    Private graph As New Dictionary(Of T, List(Of (T, Integer)))()
+    Private weights As New Dictionary(Of T, Integer)()
 
-    Private adjacencyList As New Dictionary(Of T, List(Of T))()
-
-    Public Sub New()
-    End Sub
-
-    ' Add a vertex to the graph
-    Public Sub AddVertex(vertex As T) Implements ImethodGraphs(Of T).AddVertex
-        If Not adjacencyList.ContainsKey(vertex) Then
-            adjacencyList(vertex) = New List(Of T)()
-            Console.WriteLine($"Vertex {vertex} added to the graph.")
-            Return
+    Public Sub AddVertex(vertex As T)
+        If Not graph.ContainsKey(vertex) Then
+            graph(vertex) = New List(Of (T, Integer))()
         End If
-
-        Console.WriteLine($"Vertex {vertex} already exists in the graph.")
     End Sub
 
-    ' Remove a vertex and all associated edges
-    Public Sub RemoveVertex(vertex As T) Implements ImethodGraphs(Of T).RemoveVertex
-        If adjacencyList.ContainsKey(vertex) Then
-            adjacencyList.Remove(vertex)
-            Console.WriteLine($"Vertex {vertex} removed from the graph.")
+    Public Sub AddEdge(source As T, destination As T, weight As Integer)
+        If graph.ContainsKey(source) AndAlso graph.ContainsKey(destination) Then
+            graph(source).Add((destination, weight))
+        End If
+    End Sub
 
-            For Each otherVertex In adjacencyList.Keys
-                adjacencyList(otherVertex).Remove(vertex)
+    Public Sub RemoveEdge(source As T, destination As T)
+        If graph.ContainsKey(source) Then
+            graph(source).RemoveAll(Function(edge) edge.Item1.Equals(destination))
+        End If
+    End Sub
+
+    Public Function GetNeighbors(vertex As T) As IEnumerable(Of (T, Integer))
+        If graph.ContainsKey(vertex) Then
+            Return graph(vertex)
+        Else
+            Return Enumerable.Empty(Of (T, Integer))()
+        End If
+    End Function
+
+    Public Function GetVertices() As IEnumerable(Of T)
+        Return graph.Keys
+    End Function
+
+    Public Sub RemoveVertex(vertex As T)
+        If graph.ContainsKey(vertex) Then
+            graph.Remove(vertex)
+
+            For Each key In graph.Keys
+                graph(key).RemoveAll(Function(tuple) tuple.Item1.Equals(vertex))
             Next
-            Return
         End If
-
-        Console.WriteLine($"Vertex {vertex} does not exist in the graph.")
     End Sub
 
-    ' Add an edge between two existing vertices
-    Public Sub AddEdge(vertexStart As T, vertexEnd As T) Implements ImethodGraphs(Of T).AddEdge
-        If adjacencyList.ContainsKey(vertexStart) AndAlso adjacencyList.ContainsKey(vertexEnd) Then
-            adjacencyList(vertexStart).Add(vertexEnd)
-            adjacencyList(vertexEnd).Add(vertexStart) ' If the graph is undirected
-            Console.WriteLine($"Edge added between {vertexStart} and {vertexEnd}.")
-            Return
+    Public Function DFS(start As T, goal As T) As (bestPath As List(Of T), steps As List(Of List(Of T)))
+        If Not graph.ContainsKey(start) Then
+            Console.WriteLine($"The starting vertex {start} is not present in the graph.")
+            Return (New List(Of T)(), New List(Of List(Of T))())
         End If
-        Console.WriteLine($"Vertices {vertexStart} or {vertexEnd} do not exist in the graph.")
-    End Sub
 
-    ' Remove an edge between two existing vertices
-    Public Sub RemoveEdge(vertexStart As T, vertexEnd As T) Implements ImethodGraphs(Of T).RemoveEdge
-        If adjacencyList.ContainsKey(vertexStart) AndAlso adjacencyList.ContainsKey(vertexEnd) Then
-            adjacencyList(vertexStart).Remove(vertexEnd)
-            adjacencyList(vertexEnd).Remove(vertexStart) ' If the graph is undirected
-            Console.WriteLine($"Edge removed between {vertexStart} and {vertexEnd}.")
-            Return
-        End If
-        Console.WriteLine($"Vertices {vertexStart} or {vertexEnd} do not exist in the graph.")
-    End Sub
+        Dim stack As New Stack(Of T)()
+        Dim parents As New Dictionary(Of T, T)()
+        weights.Clear()
 
-    ' Check the existence of a vertex
-    Public Function VertexExists(vertex As T) As Boolean Implements ImethodGraphs(Of T).VertexExists
-        Dim exists As Boolean = adjacencyList.ContainsKey(vertex)
-        Console.WriteLine($"Vertex {vertex} exists in the graph: {exists}.")
-        Return exists
-    End Function
+        stack.Push(start)
+        parents(start) = Nothing
+        weights(start) = 0 ' Initialize the weight for the starting vertex
 
-    ' Check the existence of an edge
-    Public Function EdgeExists(vertexStart As T, vertexEnd As T) As Boolean Implements ImethodGraphs(Of T).EdgeExists
-        Dim exists As Boolean = adjacencyList.ContainsKey(vertexStart) AndAlso adjacencyList(vertexStart).Contains(vertexEnd)
-        Console.WriteLine($"Edge between {vertexStart} and {vertexEnd} exists: {exists}.")
-        Return exists
-    End Function
+        Dim steps As New List(Of List(Of T))()
 
-    ' Get all vertices
-    Public Function GetAllVertices() As List(Of T) Implements ImethodGraphs(Of T).GetAllVertices
-        Dim vertices As New List(Of T)(adjacencyList.Keys)
-        Console.WriteLine("All vertices in the graph: " + String.Join(", ", vertices))
-        Return vertices
-    End Function
+        While stack.Count > 0
+            Dim currentVertex As T = stack.Pop()
+            Dim currentStep As New List(Of T) From {currentVertex}
 
-    ' Get all edges
-    Public Function GetAllEdges() As List(Of (T, T)) Implements ImethodGraphs(Of T).GetAllEdges
-        Dim edges As New List(Of (T, T))()
+            For Each edge In graph(currentVertex)
+                Dim neighbor As T = edge.Item1
+                Dim weight As Integer = edge.Item2
 
-        For Each vertex In adjacencyList.Keys
-            For Each neighbor In adjacencyList(vertex)
-                edges.Add((vertex, neighbor))
+                Dim totalWeight As Integer = weights(currentVertex) + weight
+
+                If Not parents.ContainsKey(neighbor) OrElse totalWeight < weights(neighbor) Then
+                    stack.Push(neighbor)
+                    parents(neighbor) = currentVertex
+                    weights(neighbor) = totalWeight
+
+                    ' Add the vertex to the current step
+                    currentStep.Add(neighbor)
+                End If
             Next
+
+            ' Add the current step to the list of steps
+            steps.Add(New List(Of T)(currentStep))
+        End While
+
+        Dim bestPath As List(Of T) = BuildPath(parents, goal)
+        Return (bestPath, steps)
+    End Function
+
+    Private Sub PrintDFSSteps(steps As List(Of List(Of T)))
+        Console.WriteLine("Depth-First Search (DFS) Steps:")
+        For i As Integer = 0 To steps.Count - 1
+            Console.WriteLine($"Step {i + 1}: {String.Join(" -> ", steps(i))}")
+        Next
+    End Sub
+
+    Private Function BuildPath(parents As Dictionary(Of T, T), goal As T) As List(Of T)
+        Dim path As New List(Of T)()
+
+        Dim current As T = goal
+        While Not EqualityComparer(Of T).Default.Equals(current, Nothing)
+            path.Insert(0, current)
+
+            ' Check if the key is present in the dictionary
+            If parents.ContainsKey(current) Then
+                current = parents(current)
+            Else
+                ' Handle the case where the key is not present
+                Exit While
+            End If
+        End While
+
+        Return path
+    End Function
+
+    Public Function GetAdjacencyMatrix() As List(Of String)
+        Dim matrixStrings As New List(Of String)()
+        Dim numVertices As Integer = graph.Count
+
+        Dim header As New StringBuilder("   ")
+        For Each vertex In graph.Keys
+            header.Append($"{vertex} ")
+        Next
+        matrixStrings.Add(header.ToString())
+
+        For Each vertex In graph.Keys
+            Dim row As New StringBuilder($"{vertex} ")
+            For Each otherVertex In graph.Keys
+                Dim hasEdge As Boolean = graph(vertex).Any(Function(edge) edge.Item1.Equals(otherVertex))
+                row.Append(If(hasEdge, "1 ", "0 "))
+            Next
+            matrixStrings.Add(row.ToString().Trim())
         Next
 
-        Console.WriteLine("All edges in the graph: " + String.Join(", ", edges))
-        Return edges
-    End Function
-
-    ' Traverse the graph using BFS
-    Public Function TraverseBFS(startVertex As T) As List(Of T) Implements ImethodGraphs(Of T).TraverseBFS
-        Dim visited As New List(Of T)()
-        Dim queue As New Queue(Of T)()
-
-        ' Check if startVertex is in adjacencyList
-        If Not adjacencyList.ContainsKey(startVertex) Then
-            Console.WriteLine($"Vertex {startVertex} does not exist in the graph.")
-            Return visited
-        End If
-
-        visited.Add(startVertex)
-        queue.Enqueue(startVertex)
-
-        While queue.Count > 0
-            Dim currentVertex As T = queue.Dequeue()
-
-            ' Check if currentVertex is in adjacencyList
-            If adjacencyList.ContainsKey(currentVertex) Then
-                For Each neighbor In adjacencyList(currentVertex)
-                    If Not visited.Contains(neighbor) Then
-                        visited.Add(neighbor)
-                        queue.Enqueue(neighbor)
-                    End If
-                Next
-            End If
-        End While
-
-        Console.WriteLine("BFS traversal result: " + String.Join(", ", visited))
-        Return visited
-    End Function
-
-    ' Calculate the degree of a vertex
-    Public Function CalculateDegree(vertex As T) As Integer Implements ImethodGraphs(Of T).CalculateDegree
-        Dim degree As Integer = If(adjacencyList.ContainsKey(vertex), adjacencyList(vertex).Count, -1)
-        Console.WriteLine($"Degree of vertex {vertex}: {degree}.")
-        Return degree
-    End Function
-
-    ' Calculate the breadth of the graph and the level of a node
-    Public Function CalculateBFSLevels(startVertex As T) As Dictionary(Of T, Integer) Implements ImethodGraphs(Of T).CalculateBFSLevels
-        Dim levels As New Dictionary(Of T, Integer)()
-        Dim queue As New Queue(Of T)()
-
-        If Not adjacencyList.ContainsKey(startVertex) Then
-            Console.WriteLine($"Vertex {startVertex} does not exist in the graph.")
-            Return levels
-        End If
-
-        levels(startVertex) = 0
-        queue.Enqueue(startVertex)
-
-        While queue.Count > 0
-            Dim currentVertex As T = queue.Dequeue()
-
-            ' Verificar si currentVertex está en adjacencyList
-            If adjacencyList.ContainsKey(currentVertex) Then
-                For Each neighbor In adjacencyList(currentVertex)
-                    If Not levels.ContainsKey(neighbor) Then
-                        levels(neighbor) = levels(currentVertex) + 1
-                        queue.Enqueue(neighbor)
-                    End If
-                Next
-            End If
-        End While
-
-        Console.WriteLine("BFS levels: " + String.Join(", ", levels.Select(Function(pair) $"{pair.Key}:{pair.Value}")))
-        Return levels
+        Return matrixStrings
     End Function
 End Class

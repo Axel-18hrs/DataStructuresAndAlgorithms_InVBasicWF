@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices.JavaScript.JSType
+Imports System.Security.Cryptography
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class Form1
@@ -8,11 +9,13 @@ Public Class Form1
     Private algorithms As ImethodAlgorithms()
     Private tree As BinaryTree
     Private graph As Graph(Of Object)
+    Private algorithm As ImethodAlgorithms
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlLists.Visible = False
         pnlStacks.Visible = False
         pnlQueues.Visible = False
         pnlTree.Visible = False
+        pnlGraph.Visible = False
     End Sub
     Public Sub ShowLists()
         listLista.Items.Clear()
@@ -104,6 +107,8 @@ Public Class Form1
         pnlLists.Visible = False
         pnlStacks.Visible = True
         pnlQueues.Visible = False
+        pnlTree.Visible = False
+        pnlGraph.Visible = False
         gbxMenuStackAll.Visible = False
         gbxMenuStatickStack.Visible = False
     End Sub
@@ -166,6 +171,8 @@ Public Class Form1
         pnlLists.Visible = False
         pnlStacks.Visible = False
         pnlQueues.Visible = True
+        pnlGraph.Visible = False
+        pnlTree.Visible = False
         gbxPriorityQue.Visible = False
         gbxCircularQ.Visible = False
         gbxCircularQLenght.Visible = False
@@ -426,7 +433,282 @@ Public Class Form1
     End Sub
 
     Private Sub GraphsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraphsToolStripMenuItem.Click
+        pnlLists.Visible = False
+        pnlQueues.Visible = False
+        pnlStacks.Visible = False
+        pnlTree.Visible = False
+        pnlGraph.Visible = True
+        graph = New Graph(Of Object)
+    End Sub
+
+    Private Function CalculateTotalWeight(path As List(Of Object)) As Integer
+        Dim totalWeight As Integer = 0
+
+        For i As Integer = 0 To path.Count - 2
+            Dim source = path(i)
+            Dim destination = path(i + 1)
+
+            For Each neighborWeightTuple In graph.GetNeighbors(source)
+                Dim neighbor As Object = neighborWeightTuple.Item1
+                Dim weight As Integer = neighborWeightTuple.Item2
+
+                If Object.Equals(neighbor, destination) Then
+                    totalWeight += weight
+                    Exit For
+                End If
+            Next
+        Next
+
+        Return totalWeight
+    End Function
+
+    Private Sub MostrarMatrizAdyacencia()
+        Dim matrizStrings As List(Of String) = graph.GetAdjacencyMatrix()
+
+        lsbAdyacencyMatrixGraph.Items.Clear()
+
+        For Each row As String In matrizStrings
+            lsbAdyacencyMatrixGraph.Items.Add(row)
+        Next
+    End Sub
+
+    Private Sub ActualizarListBox()
+        lsbGraph.Items.Clear()
+
+        For Each vertex In graph.GetVertices()
+            lsbGraph.Items.Add($"Vertex: {vertex}")
+
+            ' Utiliza GetNeighbors para recuperar los vecinos del vértice actual
+            For Each neighbor In graph.GetNeighbors(vertex)
+                lsbGraph.Items.Add($"  -> Neighbor: {neighbor.Item1}, Weight: {neighbor.Item2}")
+            Next
+        Next
+    End Sub
+
+    Private Sub btnAddVertGraph_Click(sender As Object, e As EventArgs) Handles btnAddVertGraph.Click
+        Dim vertice As Integer
+
+        If Not Integer.TryParse(txtNumberGraph.Text, vertice) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        graph.AddVertex(vertice)
+        ActualizarListBox()
+        MostrarMatrizAdyacencia()
+
+        txtNumberGraph.Clear()
 
     End Sub
 
+    Private Sub btnAddEdgeGraph_Click(sender As Object, e As EventArgs) Handles btnAddEdgeGraph.Click
+        Dim origin, destination, weight As Integer
+
+        If Not Integer.TryParse(txtOriginGraph.Text, origin) OrElse
+            Not Integer.TryParse(txtDestinationGraph.Text, destination) OrElse
+            Not Integer.TryParse(txtWeightGraph.Text, weight) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        graph.AddEdge(origin, destination, weight)
+
+        ActualizarListBox()
+        MostrarMatrizAdyacencia()
+        MostrarMatrizAdyacencia()
+
+        txtOriginGraph.Clear()
+        txtDestinationGraph.Clear()
+        txtWeightGraph.Clear()
+
+    End Sub
+
+    Private Sub btnToursDFSGraph_Click(sender As Object, e As EventArgs) Handles btnToursDFSGraph.Click
+        Dim origen As Integer
+
+        If Not Integer.TryParse(txtOriginGraph.Text, origen) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim resultadoDFS = graph.DFS(origen, -1)
+
+        If resultadoDFS.steps.Count <= 0 Then
+            lsbTourGraph.Items.Clear()
+            MessageBox.Show($"No DFS traversal found from vertex {origen}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        lsbTourGraph.Items.Clear()
+        For i As Integer = 0 To resultadoDFS.steps.Count - 1
+            Dim paso As List(Of Object) = resultadoDFS.steps(i)
+            Dim pasoStr As String = String.Join(" -> ", paso)
+            lsbTourGraph.Items.Add($"Step {i + 1}: {pasoStr}")
+        Next
+
+        txtOriginGraph.Clear()
+
+    End Sub
+
+    Private Sub btnFindAwayGraph_Click(sender As Object, e As EventArgs) Handles btnFindAwayGraph.Click
+        Dim origen, destino As Integer
+
+        If Not Integer.TryParse(txtOriginGraph.Text, origen) OrElse Not Integer.TryParse(txtDestinationGraph.Text, destino) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim resultadoDFS = graph.DFS(origen, destino)
+
+        ' Obtener el mejor camino desde la tupla
+        Dim mejorCamino As List(Of Object) = resultadoDFS.bestPath
+
+        If mejorCamino.Count <= 0 Then
+            MessageBox.Show($"A path was not found from vertex {origen} to vertex {destino}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim caminoStr As String = String.Join(" -> ", mejorCamino)
+
+        Dim pesoTotal As Integer = CalculateTotalWeight(mejorCamino)
+        MessageBox.Show($"Best path found from vertex {origen} to vertex {destino}: {caminoStr}" & vbCrLf &
+                 $"Total weight of the path: {pesoTotal}", "-*-*-*-", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        txtOriginGraph.Clear()
+        txtDestinationGraph.Clear()
+    End Sub
+
+    Private Sub btnDeleteGraph_Click(sender As Object, e As EventArgs) Handles btnDeleteGraph.Click
+        If lsbGraph.SelectedItem Is Nothing Then
+            MessageBox.Show("Select a vertex to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim partes As String() = lsbGraph.SelectedItem.ToString().Split(":"c)
+
+        Dim vertice As Integer = 0
+        If Not (partes.Length >= 2 AndAlso Integer.TryParse(partes(1).Trim(), vertice)) Then
+            MessageBox.Show("Error extracting selected vertex.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        graph.RemoveVertex(vertice)
+        ActualizarListBox()
+
+    End Sub
+
+    Private Sub btnCantOfItemsAlgorithms_Click(sender As Object, e As EventArgs) Handles btnCantOfItemsAlgorithms.Click
+        lsbAlgorithmSorting.Items.Clear()
+        If algorithm Is Nothing Then
+            MessageBox.Show("Select an algorithm to order!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        Dim minon As Integer
+        Console.WriteLine("Enter the minimum range from which you want to generate your unordered array:")
+        If Not Integer.TryParse(txtMinimumRangeAlgorithms.Text, minon) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim length As Integer
+        Console.WriteLine(Environment.NewLine & "Enter the maximum range or limit where you want to generate your unordered array:")
+        If Not Integer.TryParse(txtMaximumRangeAlgorithms.Text, length) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim values As Integer
+        Console.WriteLine(Environment.NewLine & "Enter the number of values you want in your array:")
+        If Not Integer.TryParse(txtNumbersOfItemstoOrder.Text, values) Then
+            MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        If (TypeOf algorithm Is Countingsort OrElse TypeOf algorithm Is Radixsort) AndAlso minon < 0 Then
+            MessageBox.Show("Only positive numbers", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+        If TypeOf algorithm Is BucketSort Then
+            Dim arr As Double() = OperationsAlgorithm.GenerarVectorDouble(minon, length, values)
+
+            lsbAlgorithmSorting.Items.Add("Unordered array: " & "[ " & String.Join(", ", arr) & " ]")
+            Dim startTime As DateTime = DateTime.Now
+            algorithm.Sort(arr, lsbAlgorithmSorting)
+            lsbAlgorithmSorting.Items.Add("Sorted array: " & "[ " & String.Join(", ", arr) & " ]")
+            lsbAlgorithmSorting.Items.Add("Time: " & (DateTime.Now - startTime).ToString)
+            Return
+        Else
+            Dim arr As Integer() = OperationsAlgorithm.GenerarVector(minon, length, values)
+
+            lsbAlgorithmSorting.Items.Add("Unordered array: " & "[ " & String.Join(", ", arr) & " ]")
+            Dim startTime As DateTime = DateTime.Now
+            algorithm.Sort(arr, lsbAlgorithmSorting)
+            lsbAlgorithmSorting.Items.Add("Sorted array: " & "[ " & String.Join(", ", arr) & " ]")
+            lsbAlgorithmSorting.Items.Add("Time: " & (DateTime.Now - startTime).ToString)
+        End If
+
+    End Sub
+
+    Private Sub SortingAlgorithmsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortingAlgorithmsToolStripMenuItem.Click
+        pnlGraph.Visible = False
+        pnlLists.Visible = False
+        pnlQueues.Visible = False
+        pnlStacks.Visible = False
+        pnlTree.Visible = False
+        pnlAlgorithmsOfSorting.Visible = True
+    End Sub
+
+    Private Sub BinaryTreeSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BinaryTreeSortToolStripMenuItem.Click
+        algorithm = New BinaryTreeSort
+    End Sub
+
+    Private Sub BubbleSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BubbleSortToolStripMenuItem.Click
+        algorithm = New BubbleSort
+    End Sub
+
+    Private Sub BucketSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BucketSortToolStripMenuItem.Click
+        algorithm = New BucketSort
+    End Sub
+
+    Private Sub CombSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombSortToolStripMenuItem.Click
+        algorithm = New Combsort
+    End Sub
+
+    Private Sub CountingSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountingSortToolStripMenuItem.Click
+        algorithm = New Countingsort
+    End Sub
+
+    Private Sub GnomeSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GnomeSortToolStripMenuItem.Click
+        algorithm = New Gnomesort
+    End Sub
+
+    Private Sub HeapSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeapSortToolStripMenuItem.Click
+        algorithm = New Heapsort
+    End Sub
+
+    Private Sub InsertionSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InsertionSortToolStripMenuItem.Click
+        algorithm = New Insertionsort
+    End Sub
+
+    Private Sub MergeSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeSortToolStripMenuItem.Click
+        algorithm = New Mergesort
+    End Sub
+
+    Private Sub PigeonholeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PigeonholeToolStripMenuItem.Click
+        algorithm = New Pigeonhole
+    End Sub
+
+    Private Sub QuickSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuickSortToolStripMenuItem.Click
+        algorithm = New QuickSort
+    End Sub
+
+    Private Sub RadixSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RadixSortToolStripMenuItem.Click
+        algorithm = New Radixsort
+    End Sub
+
+    Private Sub ShellSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShellSortToolStripMenuItem.Click
+        algorithm = New ShellSort
+    End Sub
+    Private Sub SmoothSortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothSortToolStripMenuItem.Click
+        algorithm = New SmoothSort
+    End Sub
 End Class
