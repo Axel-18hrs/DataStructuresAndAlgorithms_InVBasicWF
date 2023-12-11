@@ -16,6 +16,7 @@ Public Class Form1
         pnlQueues.Visible = False
         pnlTree.Visible = False
         pnlGraph.Visible = False
+        pnlAlgorithmsOfSorting.Visible = False
     End Sub
     Public Sub ShowLists()
         listLista.Items.Clear()
