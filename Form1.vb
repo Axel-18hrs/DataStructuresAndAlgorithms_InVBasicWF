@@ -6,11 +6,13 @@ Public Class Form1
     Private stacks As ImethodStacks(Of Object)
     Private queues As ImethodQueues(Of Object)
     Private algorithms As ImethodAlgorithms()
-
+    Private tree As BinaryTree
+    Private graph As Graph(Of Object)
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlLists.Visible = False
         pnlStacks.Visible = False
         pnlQueues.Visible = False
+        pnlTree.Visible = False
     End Sub
     Public Sub ShowLists()
         listLista.Items.Clear()
@@ -339,4 +341,92 @@ Public Class Form1
     Private Sub btnPeekQRear_Click(sender As Object, e As EventArgs) Handles btnPeekQRear.Click
         queues.PeekRear()
     End Sub
+
+    Private Sub TreeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TreeToolStripMenuItem.Click
+        pnlLists.Visible = False
+        pnlQueues.Visible = False
+        pnlStacks.Visible = False
+        pnlTree.Visible = True
+        tree = New BinaryTree
+    End Sub
+    Public Sub ToursOfTree()
+        lsbPreorder.Items.Clear()
+        For Each val As Integer In tree.GetPreOrden
+            lsbPreorder.Items.Add(val)
+        Next
+
+        lsbPostOrder.Items.Clear()
+        For Each val As Integer In tree.GetPostOrden()
+            lsbPostOrder.Items.Add(val)
+        Next
+
+        lsbInOrder.Items.Clear()
+        For Each val As Integer In tree.GetInOrden()
+            lsbInOrder.Items.Add(val)
+        Next
+    End Sub
+
+    Private Sub VisualizarArbol(Tree As BinaryNode, parentNode As TreeNode, nodes As TreeNodeCollection)
+        If Tree IsNot Nothing Then
+            Dim NewNode As New TreeNode(Tree.Data.ToString())
+            If parentNode IsNot Nothing Then
+                parentNode.Nodes.Add(NewNode)
+            Else
+                nodes.Add(NewNode)
+            End If
+            VisualizarArbol(Tree.Left, NewNode, NewNode.Nodes)
+            VisualizarArbol(Tree.Right, NewNode, NewNode.Nodes)
+        End If
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim number As Integer
+        If Not Integer.TryParse(txtNumberBinaryTree.Text, number) Then
+            MessageBox.Show("Only numbers in the 'numbers' box!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        tree.Add(number)
+        ToursOfTree()
+
+        Dim data As Integer = 0
+        Try
+            data = Integer.Parse(txtNumberBinaryTree.Text)
+        Catch
+        End Try
+
+        tree.Add(data)
+
+        VisualizarArbol(tree.Root, Nothing, treeView.Nodes)
+
+        txtNumberBinaryTree.Clear()
+        txtNumberBinaryTree.Focus()
+
+    End Sub
+
+    Private Sub btnDeleteTreeN_Click(sender As Object, e As EventArgs) Handles btnDeleteTreeN.Click
+        Dim number As Integer
+        If Not Integer.TryParse(txtNumberBinaryTree.Text, number) Then
+            MessageBox.Show("Only numbers in the 'numbers' box!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        tree.Delete(number)
+        ToursOfTree()
+    End Sub
+
+    Private Sub btnSearchTreeN_Click(sender As Object, e As EventArgs) Handles btnSearchTreeN.Click
+        Dim number As Integer
+        If Not Integer.TryParse(txtNumberBinaryTree.Text, number) Then
+            MessageBox.Show("Only numbers in the 'numbers' box!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        tree.Search(number)
+    End Sub
+
+    Private Sub GraphsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraphsToolStripMenuItem.Click
+
+    End Sub
+
 End Class

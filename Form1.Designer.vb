@@ -82,6 +82,20 @@ Partial Class Form1
         lblLenghtStack = New Label()
         txtLengthStacks = New TextBox()
         lsbStacks = New ListBox()
+        pnlTree = New Panel()
+        treeView = New TreeView()
+        btnSearchTreeN = New Button()
+        btnDeleteTreeN = New Button()
+        label7 = New Label()
+        lsbInOrder = New ListBox()
+        label6 = New Label()
+        lsbPostOrder = New ListBox()
+        label5 = New Label()
+        lsbPreorder = New ListBox()
+        lblBinaryTree = New Label()
+        btnAdd = New Button()
+        label4 = New Label()
+        txtNumberBinaryTree = New TextBox()
         MenuStrip1.SuspendLayout()
         pnlLists.SuspendLayout()
         pnlQueues.SuspendLayout()
@@ -92,6 +106,7 @@ Partial Class Form1
         pnlStacks.SuspendLayout()
         gbxMenuStackAll.SuspendLayout()
         gbxMenuStatickStack.SuspendLayout()
+        pnlTree.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
@@ -145,13 +160,13 @@ Partial Class Form1
         ' StaticSToolStripMenuItem
         ' 
         StaticSToolStripMenuItem.Name = "StaticSToolStripMenuItem"
-        StaticSToolStripMenuItem.Size = New Size(224, 26)
+        StaticSToolStripMenuItem.Size = New Size(186, 26)
         StaticSToolStripMenuItem.Text = "Static Stack"
         ' 
         ' DinamicStackToolStripMenuItem
         ' 
         DinamicStackToolStripMenuItem.Name = "DinamicStackToolStripMenuItem"
-        DinamicStackToolStripMenuItem.Size = New Size(224, 26)
+        DinamicStackToolStripMenuItem.Size = New Size(186, 26)
         DinamicStackToolStripMenuItem.Text = "Dinamic Stack"
         ' 
         ' QueuesToolStripMenuItem
@@ -621,11 +636,157 @@ Partial Class Form1
         lsbStacks.Size = New Size(394, 340)
         lsbStacks.TabIndex = 13
         ' 
+        ' pnlTree
+        ' 
+        pnlTree.Controls.Add(treeView)
+        pnlTree.Controls.Add(btnSearchTreeN)
+        pnlTree.Controls.Add(btnDeleteTreeN)
+        pnlTree.Controls.Add(label7)
+        pnlTree.Controls.Add(lsbInOrder)
+        pnlTree.Controls.Add(label6)
+        pnlTree.Controls.Add(lsbPostOrder)
+        pnlTree.Controls.Add(label5)
+        pnlTree.Controls.Add(lsbPreorder)
+        pnlTree.Controls.Add(lblBinaryTree)
+        pnlTree.Controls.Add(btnAdd)
+        pnlTree.Controls.Add(label4)
+        pnlTree.Controls.Add(txtNumberBinaryTree)
+        pnlTree.Location = New Point(0, 31)
+        pnlTree.Name = "pnlTree"
+        pnlTree.Size = New Size(1134, 498)
+        pnlTree.TabIndex = 18
+        ' 
+        ' treeView
+        ' 
+        treeView.AllowDrop = True
+        treeView.Location = New Point(54, 68)
+        treeView.Name = "treeView"
+        treeView.Size = New Size(318, 409)
+        treeView.TabIndex = 50
+        ' 
+        ' btnSearchTreeN
+        ' 
+        btnSearchTreeN.Location = New Point(743, 279)
+        btnSearchTreeN.Name = "btnSearchTreeN"
+        btnSearchTreeN.Size = New Size(159, 40)
+        btnSearchTreeN.TabIndex = 49
+        btnSearchTreeN.Text = "Search"
+        btnSearchTreeN.UseVisualStyleBackColor = True
+        ' 
+        ' btnDeleteTreeN
+        ' 
+        btnDeleteTreeN.Location = New Point(743, 233)
+        btnDeleteTreeN.Name = "btnDeleteTreeN"
+        btnDeleteTreeN.Size = New Size(159, 40)
+        btnDeleteTreeN.TabIndex = 48
+        btnDeleteTreeN.Text = "Delete"
+        btnDeleteTreeN.UseVisualStyleBackColor = True
+        ' 
+        ' label7
+        ' 
+        label7.AutoSize = True
+        label7.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label7.Location = New Point(423, 337)
+        label7.Name = "label7"
+        label7.Size = New Size(101, 26)
+        label7.TabIndex = 47
+        label7.Text = "InOrder"
+        ' 
+        ' lsbInOrder
+        ' 
+        lsbInOrder.Font = New Font("Segoe UI", 12F)
+        lsbInOrder.FormattingEnabled = True
+        lsbInOrder.ItemHeight = 28
+        lsbInOrder.Location = New Point(423, 367)
+        lsbInOrder.Margin = New Padding(3, 4, 3, 4)
+        lsbInOrder.Name = "lsbInOrder"
+        lsbInOrder.Size = New Size(234, 116)
+        lsbInOrder.TabIndex = 46
+        ' 
+        ' label6
+        ' 
+        label6.AutoSize = True
+        label6.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label6.Location = New Point(423, 170)
+        label6.Name = "label6"
+        label6.Size = New Size(124, 26)
+        label6.TabIndex = 45
+        label6.Text = "PostOrder"
+        ' 
+        ' lsbPostOrder
+        ' 
+        lsbPostOrder.Font = New Font("Segoe UI", 12F)
+        lsbPostOrder.FormattingEnabled = True
+        lsbPostOrder.ItemHeight = 28
+        lsbPostOrder.Location = New Point(423, 200)
+        lsbPostOrder.Margin = New Padding(3, 4, 3, 4)
+        lsbPostOrder.Name = "lsbPostOrder"
+        lsbPostOrder.Size = New Size(234, 116)
+        lsbPostOrder.TabIndex = 44
+        ' 
+        ' label5
+        ' 
+        label5.AutoSize = True
+        label5.Font = New Font("Lucida Sans", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        label5.Location = New Point(423, 14)
+        label5.Name = "label5"
+        label5.Size = New Size(109, 26)
+        label5.TabIndex = 43
+        label5.Text = "Preorder"
+        ' 
+        ' lsbPreorder
+        ' 
+        lsbPreorder.Font = New Font("Segoe UI", 12F)
+        lsbPreorder.FormattingEnabled = True
+        lsbPreorder.ItemHeight = 28
+        lsbPreorder.Location = New Point(423, 44)
+        lsbPreorder.Margin = New Padding(3, 4, 3, 4)
+        lsbPreorder.Name = "lsbPreorder"
+        lsbPreorder.Size = New Size(234, 116)
+        lsbPreorder.TabIndex = 42
+        ' 
+        ' lblBinaryTree
+        ' 
+        lblBinaryTree.AutoSize = True
+        lblBinaryTree.Font = New Font("Lucida Sans", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblBinaryTree.Location = New Point(54, 27)
+        lblBinaryTree.Name = "lblBinaryTree"
+        lblBinaryTree.Size = New Size(183, 34)
+        lblBinaryTree.TabIndex = 41
+        lblBinaryTree.Text = "Binary Tree"
+        ' 
+        ' btnAdd
+        ' 
+        btnAdd.Location = New Point(743, 187)
+        btnAdd.Name = "btnAdd"
+        btnAdd.Size = New Size(159, 40)
+        btnAdd.TabIndex = 40
+        btnAdd.Text = "Add"
+        btnAdd.UseVisualStyleBackColor = True
+        ' 
+        ' label4
+        ' 
+        label4.AutoSize = True
+        label4.Location = New Point(743, 119)
+        label4.Name = "label4"
+        label4.Size = New Size(63, 20)
+        label4.TabIndex = 39
+        label4.Text = "Number"
+        ' 
+        ' txtNumberBinaryTree
+        ' 
+        txtNumberBinaryTree.ImeMode = ImeMode.NoControl
+        txtNumberBinaryTree.Location = New Point(743, 142)
+        txtNumberBinaryTree.Name = "txtNumberBinaryTree"
+        txtNumberBinaryTree.Size = New Size(253, 27)
+        txtNumberBinaryTree.TabIndex = 38
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1127, 527)
+        Controls.Add(pnlTree)
         Controls.Add(pnlQueues)
         Controls.Add(pnlStacks)
         Controls.Add(pnlLists)
@@ -655,6 +816,8 @@ Partial Class Form1
         gbxMenuStackAll.PerformLayout()
         gbxMenuStatickStack.ResumeLayout(False)
         gbxMenuStatickStack.PerformLayout()
+        pnlTree.ResumeLayout(False)
+        pnlTree.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -719,5 +882,19 @@ Partial Class Form1
     Private WithEvents lblLenghtStack As Label
     Private WithEvents txtLengthStacks As TextBox
     Private WithEvents lsbStacks As ListBox
+    Private WithEvents pnlTree As Panel
+    Private WithEvents treeView As TreeView
+    Private WithEvents btnSearchTreeN As Button
+    Private WithEvents btnDeleteTreeN As Button
+    Private WithEvents label7 As Label
+    Private WithEvents lsbInOrder As ListBox
+    Private WithEvents label6 As Label
+    Private WithEvents lsbPostOrder As ListBox
+    Private WithEvents label5 As Label
+    Private WithEvents lsbPreorder As ListBox
+    Private WithEvents lblBinaryTree As Label
+    Private WithEvents btnAdd As Button
+    Private WithEvents label4 As Label
+    Private WithEvents txtNumberBinaryTree As TextBox
 
 End Class
