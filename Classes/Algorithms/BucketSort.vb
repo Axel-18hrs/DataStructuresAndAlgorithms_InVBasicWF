@@ -46,10 +46,8 @@
         ' Insertar elementos en sus respectivos buckets
         For Each element In array
             iterations += 1 ' Incrementa el número de iteraciones
-            buckets(CInt(element * array.Length)).Add(element)
+            buckets(CInt(element * array.Length) Mod buckets.Length).Add(element)
 
-            PrintBucketState(buckets, listBX)
-            PrintArray(array, listBX)
         Next
 
         ' Imprimir el estado de los buckets después de la inserción
@@ -71,6 +69,9 @@
                 k += 1
             Next
         Next
+
+        ' Imprimir el estado del array después de la ordenación
+        PrintArray(array, listBX)
 
         Return array
     End Function

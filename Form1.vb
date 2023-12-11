@@ -623,7 +623,7 @@ Public Class Form1
             MessageBox.Show("Only numbers in the boxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
-        If (TypeOf algorithm Is Countingsort OrElse TypeOf algorithm Is Radixsort) AndAlso minon < 0 Then
+        If (TypeOf algorithm Is Countingsort OrElse TypeOf algorithm Is Radixsort OrElse TypeOf algorithm Is BucketSort) AndAlso minon < 0 Then
             MessageBox.Show("Only positive numbers", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
