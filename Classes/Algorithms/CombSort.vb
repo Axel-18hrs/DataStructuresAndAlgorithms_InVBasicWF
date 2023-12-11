@@ -17,6 +17,8 @@
 
         Dim swapped As Boolean
 
+        Dim printInterval As Integer = Math.Max(1, n \ 10) ' Imprimir cada 10% del arreglo
+
         Do
             ' Aplicar un salto mínimo de 1
             If gap > 1 Then
@@ -33,10 +35,14 @@
                 End If
             Next
 
-            ' Imprimir el arreglo completo en cada intercambio
-            listBX.Items.Add("[ " & String.Join(", ", arr) & " ]")
+            ' Imprimir el arreglo en intervalos específicos
+            If iterations Mod printInterval = 0 Then
+                listBX.Items.Add("[ " & String.Join(", ", arr) & " ]")
+            End If
+
             iterations += 1 ' Incrementa el número de iteraciones
-        Loop While gap > 1 OrElse swapped
+        Loop While gap > 1 AndAlso swapped
+
         listBX.Items.Add($"Number of iterations: {iterations}")
     End Sub
 
