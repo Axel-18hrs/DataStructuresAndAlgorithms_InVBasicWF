@@ -52,7 +52,11 @@ Public Class Form1
     End Sub
 
     Private Sub ListsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListsToolStripMenuItem.Click
-
+        pnlLists.Visible = True
+        pnlStacks.Visible = False
+        pnlQueues.Visible = False
+        pnlTree.Visible = False
+        pnlGraph.Visible = False
     End Sub
 
     Private Sub SimpleListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimpleListToolStripMenuItem.Click

@@ -82,9 +82,9 @@
         End If
 
         ' Case 2: If the data is at the beginning
-        If Head.CompareTo(data) = 0 And Head.Data.ToString() Is data.ToString Then
+        If Head.CompareTo(data) = 0 And Object.Equals(Head.Data, data) Then
             Console.WriteLine($"- Data[{data}] exists in the list")
-            MessageBox.Show(Head.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Head.Data.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -95,9 +95,9 @@
         End While
 
         ' Case 4: If the data is at X position
-        If CurrentNode.CompareTo(data) = 0 And CurrentNode.Data.ToString Is data.ToString Then
+        If CurrentNode.CompareTo(data) = 0 And Object.Equals(CurrentNode.Data, data) Then
             Console.WriteLine($"- Data[{data}] exists in the list")
-            MessageBox.Show(Head.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(CurrentNode.Data.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -169,7 +169,7 @@
         End While
 
         ' Case 4: The data exists in the last element
-        If CurrentNode.CompareTo(data) = 0 Then
+        If CurrentNode.CompareTo(data) = 0 AndAlso Object.Equals(CurrentNode.Data, data) Then
             Return True
         End If
 

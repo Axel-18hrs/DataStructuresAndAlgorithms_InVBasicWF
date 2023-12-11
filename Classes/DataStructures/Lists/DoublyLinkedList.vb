@@ -125,7 +125,7 @@
         ' Case 5: If the data exists at X position
         If CurrentNode.CompareTo(data) = 0 AndAlso CurrentNode.Equals(data) Then
             Console.WriteLine($"- Data[{data}] exists in the list")
-            MessageBox.Show(CurrentNode.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(CurrentNode.Data.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 

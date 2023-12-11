@@ -104,7 +104,7 @@
         ' Case 2: If the data is at the beginning of the list
         If Head.CompareTo(data) = 0 AndAlso Head.Equals(data) Then
             Console.WriteLine($"- Data[{data}] exists in the list")
-            MessageBox.Show(Head.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Head.Data.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -117,7 +117,7 @@
         ' Case 4: The entered data exists at X position
         If CurrentNode.CompareTo(data) = 0 Then
             Console.WriteLine($"- Data[{data}] exists in the list")
-            MessageBox.Show(CurrentNode.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(CurrentNode.Data.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
@@ -177,7 +177,7 @@
         End If
 
         ' Case 2: If the data already exists at the beginning
-        If Head.CompareTo(data) = 0 Then
+        If Head.CompareTo(data) = 0 AndAlso Object.Equals(Head.Data, data) Then
             Return True
         End If
 
@@ -188,7 +188,7 @@
         End While
 
         ' Case 4: If the data already exists at X position / or at the end
-        If CurrentNode.CompareTo(data) = 0 Then
+        If CurrentNode.CompareTo(data) = 0 AndAlso Object.Equals(CurrentNode.Data, data) Then
             Return True
         End If
         ' Case 5: The data does not exist in the list

@@ -196,12 +196,12 @@
         End If
 
         ' Case 2: If the first element already exists
-        If Head.CompareTo(data) = 0 Then
+        If Head.CompareTo(data) = 0 AndAlso Object.Equals(Head.Data, data) Then
             Return True
         End If
 
         ' Case 3: If the data is at the end
-        If LastNode.CompareTo(data) = 0 Then
+        If LastNode.CompareTo(data) = 0 AndAlso Object.Equals(LastNode.Data, data) Then
             Return True
         End If
 
@@ -212,7 +212,7 @@
         End While
 
         ' Case 5: The entered data exists at X position
-        If CurrentNode.CompareTo(data) = 0 Then
+        If CurrentNode.CompareTo(data) = 0 AndAlso Object.Equals(CurrentNode.Data, data) Then
             Return True
         End If
 
