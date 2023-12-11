@@ -47,12 +47,10 @@
         End If
 
         If front = rear Then
-            Console.WriteLine($"Dequeued: {myCircularQueue(front)}")
             front = rear = -1
             Return
         End If
 
-        Console.WriteLine($"Dequeued: {myCircularQueue(front)}")
         front = (front + 1) Mod capacity
     End Sub
 
@@ -67,7 +65,6 @@
             Return
         End If
 
-        Console.WriteLine($"Front element: {myCircularQueue(front)}")
         MessageBox.Show($"Front element: {myCircularQueue(front)}", "-*-*-*-", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 

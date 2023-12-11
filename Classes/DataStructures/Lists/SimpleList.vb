@@ -82,7 +82,7 @@
         End If
 
         ' Case 2: If the data is at the beginning
-        If Head.CompareTo(data) = 0 Then
+        If Head.CompareTo(data) = 0 And Head.Data.ToString() Is data.ToString Then
             Console.WriteLine($"- Data[{data}] exists in the list")
             MessageBox.Show(Head.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
@@ -95,7 +95,7 @@
         End While
 
         ' Case 4: If the data is at X position
-        If CurrentNode.CompareTo(data) = 0 Then
+        If CurrentNode.CompareTo(data) = 0 And CurrentNode.Data.ToString Is data.ToString Then
             Console.WriteLine($"- Data[{data}] exists in the list")
             MessageBox.Show(Head.ToString(), "Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
